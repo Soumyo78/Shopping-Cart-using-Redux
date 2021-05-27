@@ -1,0 +1,29 @@
+.item-card-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.item-counter-container {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 5px;
+}
+
+.item-container {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  gap: 100px;
+  margin-left: 30px;
+  margin-right: 200px;
+}
+
+.item-name-price-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}

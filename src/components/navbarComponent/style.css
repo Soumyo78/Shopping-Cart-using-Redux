@@ -1,0 +1,38 @@
+.navbar-container {
+  background-color: darkgreen;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#navbar-title-text {
+  color: white;
+}
+
+#cart-pic {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  padding-top: 20px;
+}
+
+.cart-amount-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.amount-container {
+  position: absolute;
+  padding-left: 20px;
+  top: -10px;
+}
+
+.total-amount {
+  background-color: lightgreen;
+  border-radius: 50%;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
