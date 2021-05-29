@@ -1,15 +1,28 @@
 import "./style.css";
+import { connect } from "react-redux";
+import { INCREASE, DECREASE, REMOVE } from "../../actionTypes/cartActionTypes";
 
 const ItemCardComponent = (props) => {
-  const { key, id, title, price, img, amount } = props;
+  const {
+    id,
+    title,
+    price,
+    img,
+    amount,
+    removeItem,
+    addToCart,
+    removeFromCart,
+  } = props;
+
   return (
-    <div className="item-card-container" key={key}>
+    <div className="item-card-container">
       <input
         type="image"
         src="https://img.icons8.com/fluent/48/000000/close-window.png"
         alt="close-btn"
         width="30px"
         height="30px"
+        onClick={removeItem}
       />
       <div className="item-container">
         <img src={img} alt={title} height="100px" />
@@ -18,7 +31,7 @@ const ItemCardComponent = (props) => {
             {title}
           </h2>
           <h3 id={`item-price-${id}`} className="item-price-text">
-            Price: ₹{price}
+            Price: ₹{price}.00
           </h3>
         </div>
       </div>
@@ -29,6 +42,7 @@ const ItemCardComponent = (props) => {
           alt="plus-btn"
           width="34px"
           height="34px"
+          onClick={addToCart}
         />
         <h3>{amount}</h3>
         <input
@@ -37,10 +51,20 @@ const ItemCardComponent = (props) => {
           alt="minus-btn"
           width="30px"
           height="30px"
+          onClick={removeFromCart}
         />
       </div>
     </div>
   );
 };
 
-export default ItemCardComponent;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { id } = ownProps;
+  return {
+    addToCart: () => dispatch({ type: INCREASE }),
+    removeFromCart: () => dispatch({ type: DECREASE }),
+    removeItem: () => dispatch({ type: REMOVE, payload: { id: id } }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ItemCardComponent);

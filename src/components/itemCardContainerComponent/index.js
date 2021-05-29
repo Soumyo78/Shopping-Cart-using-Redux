@@ -1,20 +1,28 @@
 import "./style.css";
+import { connect } from "react-redux";
+import emptyCartPic from "../../resources/empty-cart.webp";
 import ItemCardComponent from "../ItemCardComponent/index";
 import FooterComponent from "../footerComponent/index";
 
 const ItemCardContainerComponent = (props) => {
   const { cartItems = [] } = props;
   if (cartItems.length === 0) {
-    return <img src="https://i1.wp.com/www.huratips.com/wp-content/uploads/2019/04/empty-cart.png?fit=603%2C288&ssl=1" alt="Empty Cart Image" />;
+    return <img src={emptyCartPic} atl="Empty Cart" />;
   }
   return (
     <div className="item-card-main-container">
-      {cartItems.map((item, index) => {
+      {cartItems.map((item) => {
         return <ItemCardComponent key={item.id} {...item} />;
       })}
-      <FooterComponent/>
+      <FooterComponent />
     </div>
   );
 };
 
-export default ItemCardContainerComponent;
+const mapStateToProps = (state) => {
+  return {
+    cartItems: state.cart,
+  };
+};
+
+export default connect(mapStateToProps)(ItemCardContainerComponent);
