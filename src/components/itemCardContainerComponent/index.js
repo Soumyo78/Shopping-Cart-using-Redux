@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import emptyCartPic from "../../resources/empty-cart.webp";
 import ItemCardComponent from "../ItemCardComponent/index";
 import FooterComponent from "../footerComponent/index";
-import { GET_TOTALS } from "../../actionTypes/cartActionTypes";
+import { getTotalAction } from "../../actions/cartActions";
 
 const ItemCardContainerComponent = (props) => {
   const { cartItems = [], dispatch } = props;
 
   useEffect(() => {
-    dispatch({ type: GET_TOTALS });
+    dispatch(getTotalAction());
   });
 
   if (cartItems.length === 0) {

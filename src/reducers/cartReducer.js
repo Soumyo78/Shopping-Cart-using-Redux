@@ -4,7 +4,7 @@ import {
   CLEAR_CART,
   REMOVE,
   GET_TOTALS,
-} from "../actionTypes/cartActionTypes";
+} from "../actions/cartActions";
 import cartItems from "../cart-items";
 
 const initialState = {

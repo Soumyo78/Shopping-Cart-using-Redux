@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import "./style.css";
 import { connect } from "react-redux";
-import { CLEAR_CART } from "../../actionTypes/cartActionTypes";
+import { clearCartAction } from "../../actions/cartActions";
 
 const FooterComponent = (props) => {
   const { totalPrice, dispatch } = props;
@@ -15,7 +15,7 @@ const FooterComponent = (props) => {
       </div>
       <button
         className="clear-all-btn"
-        onClick={() => dispatch({ type: CLEAR_CART })}
+        onClick={() => dispatch(clearCartAction())}
       >
         Clear All
       </button>

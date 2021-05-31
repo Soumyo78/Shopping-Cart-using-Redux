@@ -1,6 +1,10 @@
 import "./style.css";
 import { connect } from "react-redux";
-import { INCREASE, DECREASE, REMOVE } from "../../actionTypes/cartActionTypes";
+import {
+  decreaseAction,
+  removeAction,
+  increaseAction,
+} from "../../actions/cartActions";
 
 const ItemCardComponent = (props) => {
   const {
@@ -67,10 +71,9 @@ const ItemCardComponent = (props) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { id, amount } = ownProps;
   return {
-    addToCart: () => dispatch({ type: INCREASE, payload: { id: id } }),
-    removeFromCart: () =>
-      dispatch({ type: DECREASE, payload: { id: id, amount: amount } }),
-    removeItem: () => dispatch({ type: REMOVE, payload: { id: id } }),
+    addToCart: () => dispatch(increaseAction(id)),
+    removeFromCart: () => dispatch(decreaseAction(id, amount)),
+    removeItem: () => dispatch(removeAction(id)),
   };
 };
 
