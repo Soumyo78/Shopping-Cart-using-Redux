@@ -51,7 +51,13 @@ const ItemCardComponent = (props) => {
           alt="minus-btn"
           width="30px"
           height="30px"
-          onClick={removeFromCart}
+          onClick={() => {
+            if (amount === 1) {
+              removeItem();
+            } else {
+              removeFromCart();
+            }
+          }}
         />
       </div>
     </div>

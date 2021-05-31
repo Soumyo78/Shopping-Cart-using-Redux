@@ -41,15 +41,6 @@ const cartReducer = (state = initialState, action) => {
           }
           return cartItem;
         }),
-        cart:
-          action.payload.amount === 1
-            ? state.cart.filter((cartItem) => cartItem.id !== action.payload.id)
-            : state.cart.map((cartItem) => {
-                if (cartItem.id === action.payload.id) {
-                  cartItem = { ...cartItem, amount: cartItem.amount - 1 };
-                }
-                return cartItem;
-              }),
       };
 
     case REMOVE:
@@ -63,9 +54,9 @@ const cartReducer = (state = initialState, action) => {
     case GET_TOTALS:
       let { total, amount } = state.cart.reduce(
         (cartTotal, cartItem) => {
-          const {price, amount} = cartItem;
+          const { price, amount } = cartItem;
           cartTotal.amount += amount;
-          cartTotal.total += price*amount;
+          cartTotal.total += price * amount;
           return cartTotal;
         },
         {
@@ -74,7 +65,9 @@ const cartReducer = (state = initialState, action) => {
         }
       );
       return {
-        ...state, total, amount
+        ...state,
+        total,
+        amount,
       };
 
     default:
