@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 const Navbar = (props) => {
   const { totalAmount } = props;
+
   return (
     <nav className="navbar-container">
       <h1 id="navbar-title-text">The Mobile Shop</h1>

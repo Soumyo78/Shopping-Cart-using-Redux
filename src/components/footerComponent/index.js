@@ -5,6 +5,7 @@ import { CLEAR_CART } from "../../actionTypes/cartActionTypes";
 
 const FooterComponent = (props) => {
   const { totalPrice, dispatch } = props;
+
   return (
     <Fragment>
       <hr />

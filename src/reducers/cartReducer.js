@@ -3,13 +3,14 @@ import {
   DECREASE,
   CLEAR_CART,
   REMOVE,
+  GET_TOTALS,
 } from "../actionTypes/cartActionTypes";
 import cartItems from "../cart-items";
 
 const initialState = {
   cart: cartItems,
-  total: 100,
-  amount: 5,
+  total: 0,
+  amount: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -23,11 +24,32 @@ const cartReducer = (state = initialState, action) => {
     case INCREASE:
       return {
         ...state,
+        cart: state.cart.map((cartItem) => {
+          if (cartItem.id === action.payload.id) {
+            cartItem = { ...cartItem, amount: cartItem.amount + 1 };
+          }
+          return cartItem;
+        }),
       };
 
     case DECREASE:
       return {
         ...state,
+        cart: state.cart.map((cartItem) => {
+          if (cartItem.id === action.payload.id) {
+            cartItem = { ...cartItem, amount: cartItem.amount - 1 };
+          }
+          return cartItem;
+        }),
+        cart:
+          action.payload.amount === 1
+            ? state.cart.filter((cartItem) => cartItem.id !== action.payload.id)
+            : state.cart.map((cartItem) => {
+                if (cartItem.id === action.payload.id) {
+                  cartItem = { ...cartItem, amount: cartItem.amount - 1 };
+                }
+                return cartItem;
+              }),
       };
 
     case REMOVE:
@@ -36,6 +58,23 @@ const cartReducer = (state = initialState, action) => {
         cart: state.cart.filter(
           (cartItem) => cartItem.id !== action.payload.id
         ),
+      };
+
+    case GET_TOTALS:
+      let { total, amount } = state.cart.reduce(
+        (cartTotal, cartItem) => {
+          const {price, amount} = cartItem;
+          cartTotal.amount += amount;
+          cartTotal.total += price*amount;
+          return cartTotal;
+        },
+        {
+          total: 0,
+          amount: 0,
+        }
+      );
+      return {
+        ...state, total, amount
       };
 
     default:

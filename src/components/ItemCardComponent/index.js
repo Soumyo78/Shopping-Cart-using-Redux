@@ -59,10 +59,11 @@ const ItemCardComponent = (props) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const { id } = ownProps;
+  const { id, amount } = ownProps;
   return {
-    addToCart: () => dispatch({ type: INCREASE }),
-    removeFromCart: () => dispatch({ type: DECREASE }),
+    addToCart: () => dispatch({ type: INCREASE, payload: { id: id } }),
+    removeFromCart: () =>
+      dispatch({ type: DECREASE, payload: { id: id, amount: amount } }),
     removeItem: () => dispatch({ type: REMOVE, payload: { id: id } }),
   };
 };
