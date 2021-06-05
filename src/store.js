@@ -1,11 +1,12 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import cartReducer from "./reducers/cartReducer";
+import logger from "redux-logger";
 
 // Store Creator Function
 const storeCreator = () => {
   return createStore(
     cartReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(logger)
   );
 };
 
